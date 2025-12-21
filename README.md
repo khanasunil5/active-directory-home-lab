@@ -73,16 +73,12 @@ Minimum password age: 1 day
 Maximum password age: 42 days
 Password history: 24 passwords remembered
 
-This configuration reflects a realistic domain environment where existing policies are assessed and adjusted rather than rebuilt from scratch.
 ---
 
 ### GPO 2 — Disable USB Storage
 **Scope:** Workstations OU  
 
 I created a Group Policy to block access to removable storage devices on domain-joined workstations using Administrative Templates. While verifying the policy on CLIENT01, the USB restriction did not appear to be applied when running `gpresult /r`. After troubleshooting, I identified that this was a computer-based policy and re-ran the command using `gpresult /r /scope computer`, which confirmed the GPO was successfully applied. This reinforced the difference between user and computer Group Policy scopes and the importance of using the correct troubleshooting commands.
-
-
-**Skill demonstrated:** Endpoint security controls and prevention of unauthorised data exfiltration.
 
 ---
 
@@ -91,7 +87,6 @@ I created a Group Policy to block access to removable storage devices on domain-
 - Created and shared a central wallpaper repository on DC01
 - Deployed a standard desktop wallpaper using User Configuration policies
 
-**Skill demonstrated:** User environment standardisation and GPO validation.
 
 ---
 
