@@ -83,9 +83,13 @@ I created a Group Policy to block access to removable storage devices on domain-
 ---
 
 ### GPO 3 — Standard Desktop Wallpaper
-**Scope:** Users OU  
-- Created and shared a central wallpaper repository on DC01
-- Deployed a standard desktop wallpaper using User Configuration policies
+- Deployed a standard desktop wallpaper using Group Policy Preferences (User Configuration)
+- Configured registry-based policy settings to:
+  - Set the wallpaper path from a centrally shared location
+  - Enforce the wallpaper style (Fill)
+  - Prevent users from changing the desktop background
+- Verified the policy applied successfully to domain users on the client machine
+
 
 
 ---
@@ -93,8 +97,6 @@ I created a Group Policy to block access to removable storage devices on domain-
 ### GPO 4 — Disable Control Panel Access
 **Scope:** Users OU  
 - Blocked access to Control Panel to reduce user misconfiguration risks
-
-**Skill demonstrated:** Reducing user error through policy-based restrictions.
 
 ---
 
