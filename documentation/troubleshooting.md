@@ -10,20 +10,11 @@ This document outlines common Active Directory and Group Policy issues intention
 A domain user is unable to log in due to their account being disabled in Active Directory.
 
 ### Objective
-Demonstrate understanding of:
-- User account states in Active Directory
-- Account lockout vs account disablement
-- Basic authentication troubleshooting
+Learn how user accounts behave in Active Directory by disabling an account, observing the login error, and restoring access through basic troubleshooting.
+
 
 ### Steps to Reproduce
-1. Logged into DC01
-2. Opened **Active Directory Users and Computers (ADUC)**
-3. Navigated to the LAB_Users OU
-4. Opened properties of user:
-   - Name: Aaron Blair
-   - Username: ablair
-5. Disabled the account via:
-   - Properties → Account → ✔ Account is disabled
+I accessed the domain controller and opened Active Directory Users and Computers. From the LAB_Users OU, I opened the properties for the user Aaron Blair (ablair) and disabled the account using the account settings.
      ![Account Disabled](https://github.com/khanasunil5/active-directory-home-lab/blob/d8d79e66260a0c120a108033a7aa22c20bbfe58e/screenshots/troubleshoot-account-disabled.png)
 ### Observed Behaviour
 - Attempted to log in on CLIENT01 as `lab\ablair`
