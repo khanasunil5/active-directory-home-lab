@@ -28,7 +28,7 @@ Demonstrate understanding of:
 ### Observed Behaviour
 - Attempted to log in on CLIENT01 as `lab\ablair`
 - Received an error message indicating the account was unavailable for sign-in
-- ![Account Disabled](https://github.com/khanasunil5/active-directory-home-lab/screenshots/client-login-error.png)
+- ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/613fc69362fdd7c7840c3b06288a131b7a122712/screenshots/client-login-error.png)
 ### Investigation
 - Checked account status in ADUC
 - Confirmed the account was explicitly disabled
