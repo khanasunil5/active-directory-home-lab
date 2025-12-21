@@ -96,12 +96,7 @@ Successfully logged in as a domain user and confirmed that Group Policies were a
 A mapped network drive (H:) failed to appear for an HR user.
 
 ### Why This Scenario Matters
-Demonstrates understanding of:
-- User vs Computer GPO scope
-- Group Policy Preferences
-- Network share permissions
-- Real-world GPO troubleshooting
-
+This scenario demonstrates an understanding of user and computer Group Policy scope, Group Policy Preferences, network share permissions, and real-world GPO troubleshooting.
 ---
 
 ### Part A: Shared Folder Setup
@@ -122,34 +117,18 @@ Permissions:
 
 ### Part B: AD Objects
 
-- Created group: **HR Users** (Security, Global)
-- Created user: `hruser1`
-- Added `hruser1` to **HR Users**
+Created a global security group named HR Users, created a domain user account (lknox), and added the user to the HR Users group.
 
 ---
 
 ### Part C: Drive Mapping GPO Creation
 
-- Created GPO: **Map HR Drive**
-- Linked to **HR OU**
-- Configured:
-  - User Configuration
-  - Preferences → Drive Maps
-  - Drive Letter: H:
-  - Location: `\\DC01\HR`
+Created a Group Policy Object named Map HR Drive, linked it to the HR OU, and configured a user-based drive mapping using Group Policy Preferences to map drive H: to \\DC01\HR.
 
 ---
 
 ### Part D: Break the Configuration
-
-Issue introduced by:
-- Moving `hruser1` to an OU without the GPO
-  **or**
-- Applying the GPO incorrectly under Computer Configuration
-
-Result:
-- Logged into CLIENT01 as `lab\hruser1`
-- H: drive not present
+The issue was introduced by moving the user hruser1 into an OU that did not have the drive mapping GPO applied. After logging into CLIENT01 as lab\lknox, the H: drive was not mapped.
 
 ---
 
@@ -160,26 +139,20 @@ Commands executed on CLIENT01:
 - gpresult /r /scope user
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/drive-mapping-gpo-missing.png)
 Findings:
-- GPO missing from applied user policies
-- Confirmed scope and OU placement issue
-
+- The GPO was not listed among the applied user policies
+- The issue was identified as an incorrect scope or OU placement
+- 
 ---
 
 ### Part F: Resolution
 
-- Moved user back into correct HR OU
-- Ensured GPO:
-  - Was linked correctly
-  - Used User Configuration
-- Forced policy update
-- Logged off and logged back in
+Resolved the issue by moving the user back into the correct HR OU, confirming the GPO was linked properly and configured under User Configuration, then forcing a policy update and logging the user off and back on.
 
 ---
 
 ### Verification
 
-- H: drive successfully mapped
-- `gpresult /r /scope user` showed **Map HR Drive** applied
+The H: drive was successfully mapped, and gpresult /r /scope user confirmed that the Map HR Drive GPO was applied.
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/drive-mapping-gpo-fixed.png)
 
 
