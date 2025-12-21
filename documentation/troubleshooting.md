@@ -34,10 +34,7 @@ Successfully logged into CLIENT01.
 > “The trust relationship between this workstation and the primary domain failed.”
 
 ### What This Demonstrates
-- Understanding of domain trust relationships
-- Computer accounts in Active Directory
-- DNS dependency
-- Standard Service Desk recovery process
+This issue demonstrates an understanding of how domain trust relationships work, how computer accounts are managed in Active Directory, the role DNS plays in authentication, and the standard recovery steps used by Service Desk teams.
 
 ---
 
@@ -50,16 +47,12 @@ Successfully logged into CLIENT01.
 4. Right-clicked `CLIENT01`
 5. Selected **Disable Account**
 
-This action intentionally breaks the trust relationship between the workstation and the domain.
+This intentionally broke the trust relationship between the workstation and the domain.
 
 ---
 
 ### Step B: Observe the Failure on CLIENT01
-
-- Powered on CLIENT01
-- Attempted to log in as a domain user:
-  - `lab\jsmith`
-- Received the trust relationship error message
+attempted to log in on CLIENT01 using the domain account, which resulted in a trust relationship error message.
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-error-client.png)
 ---
 
@@ -74,9 +67,9 @@ Commands executed:
 - ping lab.local
 
 Verified:
-- DNS server pointed to the Domain Controller
-- IP address within correct subnet
-- Domain name resolution working
+- Verified that the DNS server was correctly pointing to the Domain Controller
+- Confirmed the client IP address was within the correct subnet
+- Successfully resolved the domain name, confirming name resolution was working
 
 #### 2. Computer Account Verification
 On DC01:
@@ -89,25 +82,12 @@ On DC01:
 
 #### Method Used: Rejoin the Domain (Most Common)
 
-1. On CLIENT01:
-   - Changed domain membership to **WORKGROUP**
-2. Restarted the system
-3. Rejoined domain:
-   - `lab.local`
-4. Restarted again
+On CLIENT01, I removed the machine from the domain by switching it to a workgroup, restarted the system, and then rejoined it to the lab.local domain followed by a final restart.
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-domain-rejoined.png)
 ---
 
 ### Step E: Verification
-
-- Successfully logged in as `lab\jsmith`
-- Confirmed Group Policies applied
-- Ran:
-- gpresult /r
-
-- 
-Trust relationship fully restored.
-
+Successfully logged in as a domain user and confirmed that Group Policies were applied by running gpresult /r. The trust relationship was fully restored.
 ---
 
 ## Issue 3: Drive Mapping GPO Not Applying
