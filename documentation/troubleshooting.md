@@ -24,8 +24,7 @@ Demonstrate understanding of:
    - Username: ablair
 5. Disabled the account via:
    - Properties → Account → ✔ Account is disabled
-   - 📸 Screenshot 1
-![Account Disabled](https://github.com/khanasunil5/active-directory-home-lab/blob/d8d79e66260a0c120a108033a7aa22c20bbfe58e/screenshots/troubleshoot-account-disabled.png)
+   - ![Account Disabled](https://github.com/khanasunil5/active-directory-home-lab/blob/d8d79e66260a0c120a108033a7aa22c20bbfe58e/screenshots/troubleshoot-account-disabled.png)
 ### Observed Behaviour
 - Attempted to log in on CLIENT01 as `lab\ablair`
 - Received an error message indicating the account was unavailable for sign-in
