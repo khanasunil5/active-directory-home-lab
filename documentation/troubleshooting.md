@@ -12,26 +12,19 @@ A domain user is unable to log in due to their account being disabled in Active 
 ### Objective
 Learn how user accounts behave in Active Directory by disabling an account, observing the login error, and restoring access through basic troubleshooting.
 
-
 ### Steps to Reproduce
 I accessed the domain controller and opened Active Directory Users and Computers. From the LAB_Users OU, I opened the properties for the user Aaron Blair (ablair) and disabled the account using the account settings.
      ![Account Disabled](https://github.com/khanasunil5/active-directory-home-lab/blob/d8d79e66260a0c120a108033a7aa22c20bbfe58e/screenshots/troubleshoot-account-disabled.png)
 ### Observed Behaviour
-- Attempted to log in on CLIENT01 as `lab\ablair`
-- Received an error message indicating the account was unavailable for sign-in
+After attempting to log in on CLIENT01, the user recieved an error message indicating the account was unavailable for sign-in.
  ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/613fc69362fdd7c7840c3b06288a131b7a122712/screenshots/client-login-error.png)
 ### Investigation
-- Checked account status in ADUC
-- Confirmed the account was explicitly disabled
-
+Checked the account status in ADUC and confirmed that the account was explicitly disabled.
 ### Resolution
-- Returned to DC01
-- Re-enabled the account by unchecking **Account is disabled**
-- Ensured password status was valid
+I returned to DC01 and re-enabled the user account by unchecking Account is disabled, ensuring the account was able to authenticate successfully.
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/account-reenabled-password-reset.png)
 ### Verification
-- Successfully logged into CLIENT01 as `lab\ablair`
-- Confirmed normal access restored
+Successfully logged into CLIENT01.
 
 ---
 
