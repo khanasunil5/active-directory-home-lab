@@ -103,67 +103,50 @@ I created a Group Policy to block access to removable storage devices on domain-
 ## Troubleshooting Scenarios
 
 ### Issue 1 — Disabled User Account / Password Revocation
-**Scenario:**  
-- Disabled a user account (ablair) in Active Directory
-- Attempted login resulted in authentication failure
-- Re-enabled account and restored access
+Disabled a domain user account (ablair) in Active Directory to simulate a real user access issue. Verified that login attempts failed as expected, then re-enabled the account and confirmed successful authentication.
 
-**Skills demonstrated:**  
-- Account status troubleshooting  
-- User authentication workflows  
+Skills demonstrated:
+- Active Directory user account management
+- Diagnosing account-related login failures
+- Understanding of domain authentication behaviour
 
 ---
 
 ### Issue 2 — Trust Relationship Failure
-**Error:**  
-> “The trust relationship between this workstation and the primary domain failed.”
+Error encountered: “The trust relationship between this workstation and the primary domain failed.”
+To replicate a common Service Desk issue, I intentionally reset the CLIENT01 computer account in Active Directory Users and Computers, which caused the trust relationship between the workstation and the domain to fail.
 
-**Cause (introduced intentionally):**
-- Reset CLIENT01 computer account in Active Directory
+I then logged into CLIENT01 using the local administrator account and began troubleshooting. I checked the network configuration to confirm the client was receiving a valid IP address and that DNS was correctly pointing to the Domain Controller. I verified network connectivity by confirming communication with the Domain Controller.
 
-**Troubleshooting steps:**
-- Verified DNS configuration on client
-- Confirmed IP address and domain connectivity
-- Checked computer account status in ADUC
+Finally, I reviewed the CLIENT01 computer account in Active Directory and confirmed that the account had been reset, identifying this as the cause of the trust relationship failure.
 
-**Resolution:**
-- Rejoined CLIENT01 to the domain
-- Verified successful authentication and Group Policy application
+To fix the issue, I removed CLIENT01 from the domain and joined it to a workgroup. I then rejoined the machine to the lab.local domain using domain admin credentials. After restarting the system, I confirmed successful domain login and checked that Group Policies were applying correctly using `gpresult /r`.
 
-**Skills demonstrated:**
-- Domain trust concepts
-- Computer accounts in Active Directory
-- DNS dependency in authentication
-- Structured troubleshooting methodology
+What this demonstrates:
+Understanding of how domain trust relationships work
+Knowledge of computer accounts in Active Directory
+Awareness of DNS as a critical dependency for authentication
 
 ---
 
 ### Issue 3 — Drive Mapping GPO Not Applying
-**Scenario:**
-- Created shared HR network folder with correct NTFS and share permissions
-- Created HR Users security group and assigned user
-- Configured drive mapping GPO using Group Policy Preferences
-- Intentionally broke policy by:
-  - Moving user to incorrect OU
-  - Applying GPO to wrong scope
+I set up a shared HR network folder on the domain controller and configured both share permissions and NTFS permissions correctly. I then created an HR Users security group in Active Directory, added a test user to the group, and configured a drive mapping Group Policy using Group Policy Preferences to map the share to a drive letter for HR users.
 
-**Troubleshooting steps:**
-- Forced policy update (gpupdate /force)
-- Checked applied user policies using:
-  - gpresult /r /scope user
-- Identified missing or denied GPO
+To test my understanding of Group Policy behaviour, I intentionally caused the drive mapping to fail by moving the user into an incorrect OU and by applying the GPO to the wrong scope.
 
-**Resolution:**
-- Corrected OU placement
-- Ensured GPO used User Configuration
-- Verified mapped drive appeared successfully
+When the mapped drive did not appear on the client machine, I began troubleshooting by forcing a policy update using gpupdate /force and reviewing the applied user policies with gpresult /r /scope user. This allowed me to confirm that the GPO was not being applied and identify whether it was missing or denied.
 
-**Skills demonstrated:**
-- User vs Computer GPO scope
-- Group Policy Preferences
-- File share permissions
-- Real-world Service Desk troubleshooting
+I resolved the issue by moving the user back into the correct OU and ensuring the drive mapping was configured under User Configuration rather than Computer Configuration. After updating policies and logging back in, the network drive mapped successfully.
 
+This exercise demonstrates:
+
+Understanding of User vs Computer Group Policy scope
+
+Use of Group Policy Preferences for drive mapping
+
+Knowledge of NTFS and share permissions
+
+A structured, real-world Service Desk troubleshooting approach
 ---
 
 ## What This Project Demonstrates
