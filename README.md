@@ -93,44 +93,50 @@ As the host machine has 8 GB of RAM, the lab was configured with performance and
 Reviewed and configured the Default Domain Policy to align with standard security best practices. Most password settings were already appropriately configured, so the primary change made was increasing the minimum password length to strengthen account security.
 
 The final password policy settings were:
-Minimum password length: increased from 7 to 10 characters
-Password complexity: enabled
-Minimum password age: 1 day
-Maximum password age: 42 days
-Password history: 24 passwords remembered
-![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-password-policy.png
+- Minimum password length: increased from 7 to 10 characters
+- Password complexity: enabled
+- Minimum password age: 1 day
+- Maximum password age: 42 days
+- Password history: 24 passwords remembered
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-password-policy.png)
 ---
 
 ### GPO 2 — Disable USB Storage
 **Scope:** Workstations OU  
+
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-disable-usb.png)
+
 I created a Group Policy to block access to removable storage devices on domain-joined workstations using Administrative Templates. While verifying the policy on CLIENT01, the USB restriction did not appear to be applied when running `gpresult /r`. After troubleshooting, I identified that this was a computer-based policy and re-ran the command using `gpresult /r /scope computer`, which confirmed the GPO was successfully applied. This reinforced the difference between user and computer Group Policy scopes and the importance of using the correct troubleshooting commands.
+
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-control-panel-blocked.png)
+
 ---
 
 ### GPO 3 — Standard Desktop Wallpaper
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/b561370eb4639c9288c3179307aea484b846307c/screenshots/gpo-desktop-wallpaper.png)
 - Deployed a standard desktop wallpaper using Group Policy Preferences (User Configuration)
 - Configured registry-based policy settings to:
   - Set the wallpaper path from a centrally shared location
   - Enforce the wallpaper style (Fill)
   - Prevent users from changing the desktop background
 - Verified the policy applied successfully to domain users on the client machine
-
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/b561370eb4639c9288c3179307aea484b846307c/screenshots/gpo-wallpaper-applied.png)
 
 ---
 
 ### GPO 4 — Disable Control Panel Access
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/b561370eb4639c9288c3179307aea484b846307c/screenshots/gpo-disable-control-panel.png)
 **Scope:** Users OU  
 - Blocked access to Control Panel to reduce user misconfiguration risks
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/b561370eb4639c9288c3179307aea484b846307c/screenshots/gpo-control-panel-blocked.png)
 ---
 
 ## Troubleshooting Scenarios
 
 ### Issue 1 — Disabled User Account / Password Revocation
-Disabled a domain user account (ablair) in Active Directory to simulate a real user access issue. Verified that login attempts failed as expected, then re-enabled the account and confirmed successful authentication.
 
+Disabled a domain user account (ablair) in Active Directory to simulate a real user access issue. Verified that login attempts failed as expected, then re-enabled the account and confirmed successful authentication.
+ ![Account Disabled](https://github.com/khanasunil5/active-directory-home-lab/blob/d8d79e66260a0c120a108033a7aa22c20bbfe58e/screenshots/troubleshoot-account-disabled.png)
 Skills demonstrated:
 - Active Directory user account management
 - Diagnosing account-related login failures
@@ -141,13 +147,13 @@ Skills demonstrated:
 ### Issue 2 — Trust Relationship Failure
 Error encountered: “The trust relationship between this workstation and the primary domain failed.”
 To replicate a common Service Desk issue, I intentionally reset the CLIENT01 computer account in Active Directory Users and Computers, which caused the trust relationship between the workstation and the domain to fail.
-
+![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-error-client.png)
 I then logged into CLIENT01 using the local administrator account and began troubleshooting. I checked the network configuration to confirm the client was receiving a valid IP address and that DNS was correctly pointing to the Domain Controller. I verified network connectivity by confirming communication with the Domain Controller.
 
 Finally, I reviewed the CLIENT01 computer account in Active Directory and confirmed that the account had been reset, identifying this as the cause of the trust relationship failure.
 
 To fix the issue, I removed CLIENT01 from the domain and joined it to a workgroup. I then rejoined the machine to the lab.local domain using domain admin credentials. After restarting the system, I confirmed successful domain login and checked that Group Policies were applying correctly using `gpresult /r`.
-
+![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-domain-rejoined.png)
 What this demonstrates:
 Understanding of how domain trust relationships work
 Knowledge of computer accounts in Active Directory
@@ -161,9 +167,9 @@ I set up a shared HR network folder on the domain controller and configured both
 To test my understanding of Group Policy behaviour, I intentionally caused the drive mapping to fail by moving the user into an incorrect OU and by applying the GPO to the wrong scope.
 
 When the mapped drive did not appear on the client machine, I began troubleshooting by forcing a policy update using gpupdate /force and reviewing the applied user policies with gpresult /r /scope user. This allowed me to confirm that the GPO was not being applied and identify whether it was missing or denied.
-
+![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/drive-mapping-gpo-missing.png)
 I resolved the issue by moving the user back into the correct OU and ensuring the drive mapping was configured under User Configuration rather than Computer Configuration. After updating policies and logging back in, the network drive mapped successfully.
-
+![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/drive-mapping-gpo-fixed.png)
 This exercise demonstrates:
 
 Understanding of User vs Computer Group Policy scope
