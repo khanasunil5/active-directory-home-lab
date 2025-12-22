@@ -28,6 +28,29 @@ The goal of this lab was to get hands-on experience with everyday IT Support tas
 
 ---
 
+Virtual Machine Setup
+
+Both systems in this lab were created as virtual machines using VMware Workstation. The following configurations were chosen to balance performance with the host system’s 8 GB RAM while maintaining a realistic enterprise-style setup.
+
+Domain Controller (DC01):
+Operating System: Windows Server 2019 (Desktop Experience)
+Memory: 2 GB RAM
+CPU: 1 processor, 2 cores
+Storage: 60 GB (single virtual disk)
+Network: Host-only
+IP Address: 192.168.100.10 (static)
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/ae9bb4c02a079808bf97ce4fe9bdef7e762e7c73/screenshots/vmware-vm-creation.png)
+Client Machine (CLIENT01):
+Operating System: Windows 11
+Memory: 2 GB RAM
+CPU: 1 processor, 2 cores
+Storage: 40 GB
+Network: Host-only
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/ae9bb4c02a079808bf97ce4fe9bdef7e762e7c73/screenshots/vmware-vm-overview.png)
+Using a host-only network ensured the lab remained isolated while allowing full communication between the domain controller and client machine, closely simulating an internal corporate network.
+
+---
+
 ## Virtualisation & Performance Optimisation
 As the host machine has 8 GB of RAM, the lab was configured with performance and stability in mind. VMware memory usage was limited to avoid host system issues, and the Domain Controller and client VM were only run together when necessary. Windows visual effects were disabled inside the virtual machines, and unused VMs were paused or shut down after testing. This approach mirrors real-world scenarios where systems must be managed within resource constraints.
 
@@ -37,9 +60,10 @@ As the host machine has 8 GB of RAM, the lab was configured with performance and
 - Installed and configured Windows Server 2019 (Desktop Experience)
 - Renamed the server to DC01
 - Configured a static IP address for domain stability
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/ae9bb4c02a079808bf97ce4fe9bdef7e762e7c73/screenshots/dc01-static-ip.png)
 - Installed Active Directory Domain Services and DNS
 - Promoted the server to a Domain Controller and created the lab.local domain
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/ae9bb4c02a079808bf97ce4fe9bdef7e762e7c73/screenshots/dc01-system-info.png)
 ---
 
 ## Client Configuration
