@@ -53,7 +53,9 @@ This intentionally broke the trust relationship between the workstation and the 
 
 ### Step B: Observe the Failure on CLIENT01
 attempted to log in on CLIENT01 using the domain account, which resulted in a trust relationship error message.
+
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-error-client.png)
+
 ---
 
 ### Step C: Troubleshooting Process
@@ -83,7 +85,9 @@ On DC01:
 #### Method Used: Rejoin the Domain (Most Common)
 
 On CLIENT01, I removed the machine from the domain by switching it to a workgroup, restarted the system, and then rejoined it to the lab.local domain followed by a final restart.
+
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-domain-rejoined.png)
+
 ---
 
 ### Step E: Verification
