@@ -70,23 +70,25 @@ As the host machine has 8 GB of RAM, the lab was configured with performance and
 - Installed Windows 11 on a client virtual machine 
 - successfully joined it to the lab.local domain
 - Verified domain authentication by logging in with Active Directory user accounts
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/client-domain-joined.png)
 ---
 
 ## Active Directory Structure
 - Designed and organised the Active Directory structure by creating Organizational Units (OUs) for Users, Workstations, IT, and HR
 - Created and managed user accounts and security groups within Active Directory
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/ad-ou-structure.png)
 - Performed common user lifecycle administration tasks including:
   - Creating new user accounts
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/ad-user-account.png)
   - Resetting passwords
   - Enabling and disabling user accounts
   - Managing security group membership
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/ad-group-membership.png)
 
 ---
 
 ## Group Policy Configuration
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-overview.png)
 ### GPO 1 — Domain Password Policy
 Reviewed and configured the Default Domain Policy to align with standard security best practices. Most password settings were already appropriately configured, so the primary change made was increasing the minimum password length to strengthen account security.
 
@@ -96,14 +98,14 @@ Password complexity: enabled
 Minimum password age: 1 day
 Maximum password age: 42 days
 Password history: 24 passwords remembered
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-password-policy.png
 ---
 
 ### GPO 2 — Disable USB Storage
 **Scope:** Workstations OU  
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-disable-usb.png)
 I created a Group Policy to block access to removable storage devices on domain-joined workstations using Administrative Templates. While verifying the policy on CLIENT01, the USB restriction did not appear to be applied when running `gpresult /r`. After troubleshooting, I identified that this was a computer-based policy and re-ran the command using `gpresult /r /scope computer`, which confirmed the GPO was successfully applied. This reinforced the difference between user and computer Group Policy scopes and the importance of using the correct troubleshooting commands.
-
+![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-control-panel-blocked.png)
 ---
 
 ### GPO 3 — Standard Desktop Wallpaper
