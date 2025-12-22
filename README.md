@@ -33,19 +33,19 @@ Virtual Machine Setup
 Both systems in this lab were created as virtual machines using VMware Workstation. The following configurations were chosen to balance performance with the host system’s 8 GB RAM while maintaining a realistic enterprise-style setup.
 
 Domain Controller (DC01):
-Operating System: Windows Server 2019 (Desktop Experience)
-Memory: 2 GB RAM
-CPU: 1 processor, 2 cores
-Storage: 60 GB (single virtual disk)
-Network: Host-only
-IP Address: 192.168.100.10 (static)
+- Operating System: Windows Server 2019 (Desktop Experience)
+- Memory: 2 GB RAM
+- CPU: 1 processor, 2 cores
+- Storage: 60 GB (single virtual disk)
+- Network: Host-only
+- IP Address: 192.168.100.10 (static)
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/ae9bb4c02a079808bf97ce4fe9bdef7e762e7c73/screenshots/vmware-vm-creation.png)
 Client Machine (CLIENT01):
-Operating System: Windows 11
-Memory: 2 GB RAM
-CPU: 1 processor, 2 cores
-Storage: 40 GB
-Network: Host-only
+- Operating System: Windows 11
+- Memory: 2 GB RAM
+- CPU: 1 processor, 2 cores
+- Storage: 40 GB
+- Network: Host-only
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/ae9bb4c02a079808bf97ce4fe9bdef7e762e7c73/screenshots/vmware-vm-overview.png)
 Using a host-only network ensured the lab remained isolated while allowing full communication between the domain controller and client machine, closely simulating an internal corporate network.
 
