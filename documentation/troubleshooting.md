@@ -41,11 +41,10 @@ This issue demonstrates an understanding of how domain trust relationships work,
 ### Step A: Create the Issue (Intentional Failure)
 
 1. Logged into DC01
-2. Opened **Active Directory Users and Computers**
-3. Navigated to:
-   - `lab.local → Computers`
-4. Right-clicked `CLIENT01`
-5. Selected **Disable Account**
+2. Opened Active Directory Users and Computers
+3. Navigated to lab.local then Computers
+4. Right-clicked CLIENT01
+5. Selected Disable Account
 
 This intentionally broke the trust relationship between the workstation and the domain.
 
@@ -75,7 +74,7 @@ Verified:
 
 #### 2. Computer Account Verification
 On DC01:
-- Confirmed `CLIENT01` computer account still existed in ADUC
+- Confirmed CLIENT01 computer account still existed in ADUC
 - Noted that the account had been recently reset
 
 ---
@@ -91,7 +90,9 @@ On CLIENT01, I removed the machine from the domain by switching it to a workgrou
 ---
 
 ### Step E: Verification
+
 Successfully logged in as a domain user and confirmed that Group Policies were applied by running gpresult /r. The trust relationship was fully restored.
+
 ---
 
 ## Issue 3: Drive Mapping GPO Not Applying
@@ -100,22 +101,24 @@ Successfully logged in as a domain user and confirmed that Group Policies were a
 A mapped network drive (H:) failed to appear for an HR user.
 
 ### Why This Scenario Matters
+
 This scenario demonstrates an understanding of user and computer Group Policy scope, Group Policy Preferences, network share permissions, and real-world GPO troubleshooting.
+
 ---
 
 ### Part A: Shared Folder Setup
 
 On DC01:
-- Created folder: `C:\Shared\HR`
-- Shared as: `\\DC01\HR`
+- Created folder: C:\Shared\HR
+- Shared as: \\DC01\HR
 
 Permissions:
 - Share:
-  - HR Users → Read
-  - IT Admins → Full Control
+  - HR Users > Read
+  - IT Admins > Full Control
 - NTFS:
-  - HR Users → Read
-  - IT Admins → Full Control
+  - HR Users > Read
+  - IT Admins > Full Control
 
 ---
 
@@ -145,7 +148,7 @@ Commands executed on CLIENT01:
 Findings:
 - The GPO was not listed among the applied user policies
 - The issue was identified as an incorrect scope or OU placement
-- 
+
 ---
 
 ### Part F: Resolution
