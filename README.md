@@ -19,11 +19,11 @@ The goal of this lab was to get hands-on experience with everyday IT Support tas
 ---
 
 ## Lab Architecture
-- **Domain Controller:** DC01  
-- **Client Machine:** CLIENT01  
-- **Domain:** lab.local  
-- **Network Type:** Host-only  
-- **IP Scheme:**  
+- Domain Controller: DC01  
+- Client Machine: CLIENT01  
+- Domain: lab.local  
+- Network Type: Host-only  
+- IP Scheme:  
   - DC01: 192.168.100.10 (Static IP)
 
 ---
@@ -106,7 +106,7 @@ The final password policy settings were:
 
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-disable-usb.png)
 
-I created a Group Policy to block access to removable storage devices on domain-joined workstations using Administrative Templates. While verifying the policy on CLIENT01, the USB restriction did not appear to be applied when running `gpresult /r`. After troubleshooting, I identified that this was a computer-based policy and re-ran the command using `gpresult /r /scope computer`, which confirmed the GPO was successfully applied. This reinforced the difference between user and computer Group Policy scopes and the importance of using the correct troubleshooting commands.
+I created a Group Policy to block access to removable storage devices on domain-joined workstations using Administrative Templates. While verifying the policy on CLIENT01, the USB restriction did not appear to be applied when running gpresult /r. After troubleshooting, I identified that this was a computer-based policy and re-ran the command using gpresult /r /scope computer, which confirmed the GPO was successfully applied. This reinforced the difference between user and computer Group Policy scopes and the importance of using the correct troubleshooting commands.
 
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/c5c335ed7ba3699611da75b0f27cf132ce7b9d80/screenshots/gpo-control-panel-blocked.png)
 
@@ -126,7 +126,7 @@ I created a Group Policy to block access to removable storage devices on domain-
 
 ### GPO 4 — Disable Control Panel Access
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/b561370eb4639c9288c3179307aea484b846307c/screenshots/gpo-disable-control-panel.png)
-**Scope:** Users OU  
+Scope: Users OU  
 - Blocked access to Control Panel to reduce user misconfiguration risks
 ![SCREENSHOT](https://github.com/khanasunil5/active-directory-home-lab/blob/b561370eb4639c9288c3179307aea484b846307c/screenshots/gpo-control-panel-blocked.png)
 ---
@@ -152,7 +152,7 @@ I then logged into CLIENT01 using the local administrator account and began trou
 
 Finally, I reviewed the CLIENT01 computer account in Active Directory and confirmed that the account had been reset, identifying this as the cause of the trust relationship failure.
 
-To fix the issue, I removed CLIENT01 from the domain and joined it to a workgroup. I then rejoined the machine to the lab.local domain using domain admin credentials. After restarting the system, I confirmed successful domain login and checked that Group Policies were applying correctly using `gpresult /r`.
+To fix the issue, I removed CLIENT01 from the domain and joined it to a workgroup. I then rejoined the machine to the lab.local domain using domain admin credentials. After restarting the system, I confirmed successful domain login and checked that Group Policies were applying correctly using gpresult /r.
 ![Screenshot](https://github.com/khanasunil5/active-directory-home-lab/blob/a34419acf511e242775a7c8050c69393ebf4c337/screenshots/trust-relationship-domain-rejoined.png)
 What this demonstrates:
 Understanding of how domain trust relationships work
@@ -179,6 +179,7 @@ Use of Group Policy Preferences for drive mapping
 Knowledge of NTFS and share permissions
 
 A structured, real-world Service Desk troubleshooting approach
+
 ---
 
 ## What This Project Demonstrates
@@ -191,8 +192,8 @@ A structured, real-world Service Desk troubleshooting approach
 ---
 
 ## Screenshots & Documentation
-- Screenshots of configurations, errors, and resolutions are included in the `/screenshots` directory
-- Detailed troubleshooting notes available in `/documentation`
+- Screenshots of configurations, errors, and resolutions are included in the /screenshots directory
+- Detailed troubleshooting notes available in /documentation`#
 
 ---
 
